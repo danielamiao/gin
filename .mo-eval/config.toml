@@ -1,4 +1,6 @@
 language = "go"
 test_command = "go test"
-repo = "danielamiao/gin"
+# This checkout is a fork; merged pull requests are the record of the UPSTREAM repository.
+# The forge's PR list comes from here, file content from the local clone (README → "only on a fork").
+repo = "gin-gonic/gin"
 worker_image = "golang:1.24-bookworm@sha256:1a6d4452c65dea36aac2e2d606b01b4a029ec90cc1ae53890540ce6173ea77ac"

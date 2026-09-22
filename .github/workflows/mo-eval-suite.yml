@@ -8,6 +8,9 @@ on:
       harnesses:
         description: Coding-agent harnesses, space-separated (mo, cc, pi, strands)
         default: "cc strands"
+      dry_run:
+        description: Mine + select only, print the funnel, run nothing
+        default: "false"
 permissions:
   contents: read
   pull-requests: read
@@ -33,3 +36,4 @@ jobs:
           # Small scope: this is a strands-vs-cc proof run, not a full suite.
           history: "40"
           candidates: "2"
+          dry-run: ${{ inputs.dry_run }}

@@ -25,6 +25,9 @@ jobs:
           go-version-file: go.mod
       - uses: momentohq/mo-eval-action@3d9ab89ef27549552a81405dd4bdf6522d9f55c9 # v1.4.0
         with:
+          # The public evals.gomomento.ai domain does not resolve yet; hit the Lambda Function URL
+          # directly (the OIDC audience is a fixed mo-eval-svc, so auth is unaffected).
+          service: https://zxui7nt7fztoox227b3piwf5jm0lumyg.lambda-url.us-west-2.on.aws
           arms: ${{ inputs.arms }}
           harnesses: ${{ inputs.harnesses }}
           # Small scope: this is a strands-vs-cc proof run, not a full suite.

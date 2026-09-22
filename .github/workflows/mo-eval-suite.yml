@@ -1,0 +1,32 @@
+name: mo-eval suite
+on:
+  workflow_dispatch:
+    inputs:
+      arms:
+        description: Model routes to evaluate, space-separated (one arm each)
+        default: "anthropic/claude-opus-4-8"
+      harnesses:
+        description: Coding-agent harnesses, space-separated (mo, cc, pi, strands)
+        default: "cc strands"
+permissions:
+  contents: read
+  pull-requests: read
+  id-token: write   # authenticates to mo-eval as this repository; no secret to manage
+jobs:
+  suite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
+        with:
+          go-version-file: go.mod
+      - uses: momentohq/mo-eval-action@3d9ab89ef27549552a81405dd4bdf6522d9f55c9 # v1.4.0
+        with:
+          arms: ${{ inputs.arms }}
+          harnesses: ${{ inputs.harnesses }}
+          # Small scope: this is a strands-vs-cc proof run, not a full suite.
+          history: "40"
+          candidates: "2"
